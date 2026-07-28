@@ -8,112 +8,68 @@ const router = createRouter({
   routes: [
     {
       path: '/',
-      name: 'Ecommerce',
-      component: () => import('../views/Ecommerce.vue'),
+      name: 'Dashboard',
+      component: () => import('../views/Dashboard.vue'),
       meta: {
-        title: 'eCommerce Dashboard',
+        title: 'Dashboard',
       },
     },
     {
-      path: '/calendar',
-      name: 'Calendar',
-      component: () => import('../views/Others/Calendar.vue'),
+      path: '/cars',
+      name: 'Cars',
+      component: () => import('../views/Menu/Cars/Cars.vue'),
       meta: {
-        title: 'Calendar',
+        title: 'Cars',
       },
     },
     {
-      path: '/profile',
-      name: 'Profile',
-      component: () => import('../views/Others/UserProfile.vue'),
+      path: '/cars/create',
+      name: 'CarsCreate',
+      component: () => import('../views/Menu/Cars/Create.vue'),
       meta: {
-        title: 'Profile',
+        title: 'CarsCreate',
       },
     },
     {
-      path: '/form-elements',
-      name: 'Form Elements',
-      component: () => import('../views/Forms/FormElements.vue'),
+      path: '/cars/:id/edit',
+      name: 'CarsEdit',
+      component: () => import('../views/Menu/Cars/Edit.vue'),
       meta: {
-        title: 'Form Elements',
+        title: 'CarsEdit',
       },
     },
     {
-      path: '/basic-tables',
-      name: 'Basic Tables',
-      component: () => import('../views/Tables/BasicTables.vue'),
+      path: '/components',
+      name: 'Components',
+      component: () => import('../views/Menu/Components/Components.vue'),
       meta: {
-        title: 'Basic Tables',
+        title: 'Components',
       },
     },
     {
-      path: '/line-chart',
-      name: 'Line Chart',
-      component: () => import('../views/Chart/LineChart/LineChart.vue'),
-    },
-    {
-      path: '/bar-chart',
-      name: 'Bar Chart',
-      component: () => import('../views/Chart/BarChart/BarChart.vue'),
-    },
-    {
-      path: '/alerts',
-      name: 'Alerts',
-      component: () => import('../views/UiElements/Alerts.vue'),
+      path: '/races',
+      name: 'Races',
+      component: () => import('../views/Menu/Races/Races.vue'),
       meta: {
-        title: 'Alerts',
+        title: 'Races',
       },
     },
     {
-      path: '/avatars',
-      name: 'Avatars',
-      component: () => import('../views/UiElements/Avatars.vue'),
+      path: '/results',
+      name: 'Results',
+      component: () => import('../views/Menu/Results/Results.vue'),
       meta: {
-        title: 'Avatars',
+        title: 'Results',
       },
     },
-    {
-      path: '/badge',
-      name: 'Badge',
-      component: () => import('../views/UiElements/Badges.vue'),
-      meta: {
-        title: 'Badge',
-      },
-    },
-
-    {
-      path: '/buttons',
-      name: 'Buttons',
-      component: () => import('../views/UiElements/Buttons.vue'),
-      meta: {
-        title: 'Buttons',
-      },
-    },
-
-    {
-      path: '/images',
-      name: 'Images',
-      component: () => import('../views/UiElements/Images.vue'),
-      meta: {
-        title: 'Images',
-      },
-    },
-    {
-      path: '/videos',
-      name: 'Videos',
-      component: () => import('../views/UiElements/Videos.vue'),
-      meta: {
-        title: 'Videos',
-      },
-    },
-    {
-      path: '/blank',
-      name: 'Blank',
-      component: () => import('../views/Pages/BlankPage.vue'),
-      meta: {
-        title: 'Blank',
-      },
-    },
+    // {
+    //   path: '/blank',
+    //   name: 'Blank',
+    //   component: () => import('../views/Pages/BlankPage.vue'),
+    //   meta: {
+    //     title: 'Blank',
+    //   },
+    // },
 
     {
       path: '/error-404',
