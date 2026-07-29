@@ -55,6 +55,22 @@ const router = createRouter({
       },
     },
     {
+      path: '/races/create',
+      name: 'RacesCreate',
+      component: () => import('../views/Menu/Races/Create.vue'),
+      meta: {
+        title: 'RacesCreate',
+      },
+    },
+    {
+      path: '/races/:id/edit',
+      name: 'RacesEdit',
+      component: () => import('../views/Menu/Races/Edit.vue'),
+      meta: {
+        title: 'RacesEdit',
+      },
+    },
+    {
       path: '/results',
       name: 'Results',
       component: () => import('../views/Menu/Results/Results.vue'),

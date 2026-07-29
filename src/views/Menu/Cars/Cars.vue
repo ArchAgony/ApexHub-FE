@@ -13,7 +13,7 @@
             <router-link to="/cars/create">
               <button
                 class="btn btn-success rounded-lg bg-brand-500 px-4 py-2.5 text-sm font-medium text-white hover:bg-brand-600 sm:w-auto">
-                Add cars
+                Add
               </button>
             </router-link>
           </div>
@@ -81,18 +81,16 @@
                     <router-link :to="`/cars/${car.id}/edit`">
                       <button
                         class="btn bg-yellow-600 hover:bg-yellow-700 rounded-lg bg-brand-500 px-4 py-2.5 text-sm font-medium text-white sm:w-auto">
-                        Edit cars
+                        Edit
                       </button>
                     </router-link>
                   </div>
 
                   <div>
-                    <router-link to="/cars/create">
-                      <button
-                        class="btn bg-red-600 hover:bg-red-700 rounded-lg bg-brand-500 px-4 py-2.5 text-sm font-medium text-white sm:w-auto">
-                        Delete cars
-                      </button>
-                    </router-link>
+                    <button @click="deleteCar(car.id)"
+                      class="btn bg-red-600 hover:bg-red-700 rounded-lg bg-brand-500 px-4 py-2.5 text-sm font-medium text-white sm:w-auto">
+                      Delete
+                    </button>
                   </div>
                 </div>
               </td>
@@ -130,6 +128,20 @@ const fetchCars = async () => {
 onMounted(() => {
   fetchCars()
 })
+
+const deleteCar = async (id) => {
+  const isConfirmed = confirm('are you sure?')
+
+  if (!isConfirmed) return
+
+  try {
+    await apiClient.delete(`/cars/${id}`)
+
+    fetchCars()
+  } catch (error) {
+    console.error(error)
+  }
+}
 </script>
 
 <style></style>

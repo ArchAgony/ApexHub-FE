@@ -5,7 +5,7 @@
       class="min-h-screen rounded-2xl border border-gray-200 bg-white px-5 py-7 dark:border-gray-800 dark:bg-white/[0.03] xl:px-10 xl:py-12">
       <div class="mx-auto text-center">
         <h3 class="mb-4 font-semibold text-gray-800 text-theme-xl dark:text-white/90 sm:text-2xl text-start">
-          Edit car
+          Edit race
         </h3>
 
         <div v-if="isLoading" class="text-center py-8 text-gray-500">
@@ -15,33 +15,33 @@
         <form v-else @submit.prevent="handleUpdate">
           <div class="grid grid-cols-1 lg:grid-cols-3 gap-6 mt-3">
             <label class="lg:col-span-1 mb-1.5 block text-sm font-medium text-gray-700 dark:text-gray-400 my-2">
-              Model name
+              Circuit name
             </label>
-            <input type="text" v-model="form.model_name"
+            <input type="text" v-model="form.circuit_name"
               class="lg:col-span-2 dark:bg-dark-900 h-11 w-full rounded-lg border border-gray-300 bg-transparent px-4 py-2.5 text-sm text-gray-800 shadow-theme-xs placeholder:text-gray-400 focus:border-brand-300 focus:outline-hidden focus:ring-3 focus:ring-brand-500/10 dark:border-gray-700 dark:bg-gray-900 dark:text-white/90 dark:placeholder:text-white/30 dark:focus:border-brand-800"
-              placeholder="Insert model name here..." required />
+              placeholder="Insert circuit name here..." required />
           </div>
 
           <div class="grid grid-cols-1 lg:grid-cols-3 gap-6 mt-3">
             <label class="lg:col-span-1 mb-1.5 block text-sm font-medium text-gray-700 dark:text-gray-400 my-2">
-              Chassis code
+              Race date
             </label>
-            <input type="text" v-model="form.chassis_code"
+            <input type="date" v-model="form.race_date"
               class="lg:col-span-2 dark:bg-dark-900 h-11 w-full rounded-lg border border-gray-300 bg-transparent px-4 py-2.5 text-sm text-gray-800 shadow-theme-xs placeholder:text-gray-400 focus:border-brand-300 focus:outline-hidden focus:ring-3 focus:ring-brand-500/10 dark:border-gray-700 dark:bg-gray-900 dark:text-white/90 dark:placeholder:text-white/30 dark:focus:border-brand-800"
-              placeholder="Insert chassis code here..." required />
+              placeholder="Insert race date here..." required />
           </div>
 
           <div class="grid grid-cols-1 lg:grid-cols-3 gap-6 mt-3">
             <label class="lg:col-span-1 mb-1.5 block text-sm font-medium text-gray-700 dark:text-gray-400 my-2">
-              Engine status
+              Total laps
             </label>
-            <input type="number" v-model="form.engine_status"
+            <input type="number" v-model="form.total_laps"
               class="lg:col-span-2 dark:bg-dark-900 h-11 w-full rounded-lg border border-gray-300 bg-transparent px-4 py-2.5 text-sm text-gray-800 shadow-theme-xs placeholder:text-gray-400 focus:border-brand-300 focus:outline-hidden focus:ring-3 focus:ring-brand-500/10 dark:border-gray-700 dark:bg-gray-900 dark:text-white/90 dark:placeholder:text-white/30 dark:focus:border-brand-800"
-              placeholder="Insert engine status here..." required />
+              placeholder="Insert total laps here..." required />
           </div>
 
           <div class="grid grid-cols-1 md:grid-cols-2 gap-6 mt-3">
-            <router-link to="/cars" class="text-start">
+            <router-link to="/races" class="text-start">
               <button
                 class="btn bg-red-600 hover:bg-red-700 rounded-lg bg-brand-500 px-4 py-2.5 text-sm font-medium text-white sm:w-auto">
                 Back
@@ -68,7 +68,7 @@ import { useRouter, useRoute } from "vue-router";
 import AdminLayout from "@/components/layout/AdminLayout.vue";
 import PageBreadcrumb from "@/components/common/PageBreadcrumb.vue";
 
-const currentPageTitle = ref("Cars");
+const currentPageTitle = ref("Races");
 
 const route = useRoute()
 const router = useRouter()
@@ -76,24 +76,24 @@ const router = useRouter()
 const isLoading = ref(true)     
 const isSubmitting = ref(false)
 
-const carId = route.params.id
+const raceId = route.params.id
 
 const form = reactive({
-  model_name: '',
-  chassis_code: '',
-  engine_status: '100'
+  circuit_name: '',
+  race_date: '',
+  total_laps: ''
 })
 
-const fetchCarDetail = async () => {
+const fetchRaceDetail = async () => {
   isLoading.value = true
 
   try {
-    const response = await apiClient.get(`/cars/${carId}`)
+    const response = await apiClient.get(`/races/${raceId}`)
     const data = response.data.data
 
-    form.model_name = data.model_name
-    form.chassis_code = data.chassis_code
-    form.engine_status = data.engine_status
+    form.circuit_name = data.circuit_name
+    form.race_date = data.race_date
+    form.total_laps = data.total_laps
   } catch (error) {
     console.error(error)
   } finally {
@@ -101,16 +101,16 @@ const fetchCarDetail = async () => {
   }
 }
 onMounted(() => {
-  fetchCarDetail()
+  fetchRaceDetail()
 })
 
 const handleUpdate = async () => {
   isSubmitting.value = true
 
   try {
-    await apiClient.put(`/cars/${carId}`, form)
+    await apiClient.put(`/races/${raceId}`, form)
 
-    router.push('/cars')
+    router.push('/races')
   } catch (error) {
     console.error(error)
   } finally {
