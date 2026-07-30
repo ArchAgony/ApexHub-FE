@@ -87,7 +87,7 @@
                   </div>
 
                   <div>
-                    <button @click="deleteCar(race.id)"
+                    <button @click="deleteRace(race.id)"
                       class="btn bg-red-600 hover:bg-red-700 rounded-lg bg-brand-500 px-4 py-2.5 text-sm font-medium text-white sm:w-auto">
                       Delete
                     </button>
@@ -129,7 +129,7 @@ onMounted(() => {
   fetchRaces()
 })
 
-const deleteCar = async (id) => {
+const deleteRace = async (id) => {
   const isConfirmed = confirm('are you sure?')
 
   if (!isConfirmed) return

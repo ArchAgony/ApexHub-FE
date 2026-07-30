@@ -40,12 +40,14 @@
           </div>
   
           <div class="grid grid-cols-1 md:grid-cols-2 gap-6 mt-3">
-            <router-link to="/cars" class="text-start">
-              <button
-                class="btn bg-red-600 hover:bg-red-700 rounded-lg bg-brand-500 px-4 py-2.5 text-sm font-medium text-white sm:w-auto">
-                Back
-              </button>
-            </router-link>
+            <div class="text-start">
+              <router-link to="/cars">
+                <button
+                  class="btn bg-red-600 hover:bg-red-700 rounded-lg bg-brand-500 px-4 py-2.5 text-sm font-medium text-white sm:w-auto">
+                  Back
+                </button>
+              </router-link>
+            </div>
   
             <div class="text-end">
               <button type="submit"

@@ -47,6 +47,22 @@ const router = createRouter({
       },
     },
     {
+      path: '/components/create',
+      name: 'ComponentsCreate',
+      component: () => import('../views/Menu/Components/Create.vue'),
+      meta: {
+        title: 'ComponentsCreate',
+      },
+    },
+    {
+      path: '/components/:id/edit',
+      name: 'ComponentsEdit',
+      component: () => import('../views/Menu/Components/Edit.vue'),
+      meta: {
+        title: 'ComponentsEdit',
+      },
+    },
+    {
       path: '/races',
       name: 'Races',
       component: () => import('../views/Menu/Races/Races.vue'),
