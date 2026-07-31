@@ -94,6 +94,22 @@ const router = createRouter({
         title: 'Results',
       },
     },
+    {
+      path: '/results/create',
+      name: 'ResultsCreate',
+      component: () => import('../views/Menu/Results/Create.vue'),
+      meta: {
+        title: 'ResultsCreate',
+      },
+    },
+    {
+      path: '/results/:id/edit',
+      name: 'ResultsEdit',
+      component: () => import('../views/Menu/Results/Edit.vue'),
+      meta: {
+        title: 'ResultsEdit',
+      },
+    },
     // {
     //   path: '/blank',
     //   name: 'Blank',
