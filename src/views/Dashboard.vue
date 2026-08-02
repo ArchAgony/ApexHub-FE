@@ -1,47 +1,74 @@
 <template>
   <admin-layout>
-    <div class="grid grid-cols-12 gap-4 md:gap-6">
-      <div class="col-span-12 space-y-6 xl:col-span-7">
-        <ecommerce-metrics />
-        <monthly-target />
-      </div>
-      <div class="col-span-12 xl:col-span-5">
-        <monthly-sale />
+    <div class="space-y-6">
+      <div v-if="isLoading" class="text-center py-8 text-gray-500">
+        Loading data dashboard...
       </div>
 
-      <div class="col-span-12">
-        <statistics-chart />
+      <div v-else class="grid grid-cols-1 gap-4 sm:grid-cols-2 lg:grid-cols-4 md:gap-6">
+        
+        <StatCard title="Total Cars" :value="stats.total_cars">
+          <template #icon>
+            <span class="text-xl">🏎️</span>
+          </template>
+        </StatCard>
+
+        <StatCard title="Components" :value="stats.total_components">
+          <template #icon>
+            <span class="text-xl">⚙️</span>
+          </template>
+        </StatCard>
+
+        <StatCard title="Total Races" :value="stats.total_races">
+          <template #icon>
+            <span class="text-xl">🏁</span>
+          </template>
+        </StatCard>
+
+        <StatCard title="Race Results" :value="stats.total_results">
+          <template #icon>
+            <span class="text-xl">🏆</span>
+          </template>
+        </StatCard>
+
       </div>
 
-      <div class="col-span-12 xl:col-span-5">
-        <customer-demographic />
-      </div>
-
-      <div class="col-span-12 xl:col-span-7">
+      <div class="mt-6">
         <recent-orders />
       </div>
+
     </div>
   </admin-layout>
 </template>
 
-<script>
+<script setup>
+import { ref, onMounted } from 'vue'
+import apiClient from '@/api/axios'
+
 import AdminLayout from '../components/layout/AdminLayout.vue'
-import EcommerceMetrics from '../components/ecommerce/EcommerceMetrics.vue'
-import MonthlyTarget from '../components/ecommerce/MonthlySale.vue'
-import MonthlySale from '../components/ecommerce/MonthlyTarget.vue'
-import CustomerDemographic from '../components/ecommerce/CustomerDemographic.vue'
-import StatisticsChart from '../components/ecommerce/StatisticsChart.vue'
 import RecentOrders from '../components/ecommerce/RecentOrders.vue'
-export default {
-  components: {
-    AdminLayout,
-    EcommerceMetrics,
-    MonthlyTarget,
-    MonthlySale,
-    CustomerDemographic,
-    StatisticsChart,
-    RecentOrders,
-  },
-  name: 'Ecommerce',
+import StatCard from '@/components/ecommerce/StatCard.vue'
+
+const isLoading = ref(true)
+const stats = ref({
+  total_cars: 0,
+  total_components: 0,
+  total_races: 0,
+  total_results: 0
+})
+
+const fetchDashboardStats = async () => {
+  try {
+    const response = await apiClient.get('/')
+    stats.value = response.data.data
+  } catch (error) {
+    console.error(error)
+  } finally {
+    isLoading.value = false
+  }
 }
+
+onMounted(() => {
+  fetchDashboardStats()
+})
 </script>
